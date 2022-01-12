@@ -22,8 +22,9 @@ body{
     display: grid;
     grid:
     "header header header header" auto
-    "...... lists active ......" auto /
-    1fr minmax(150px, 400px) minmax(250px, 600px) 1fr;
+    "...... lists active ......" auto/
+    1fr minmax(100px, 300px) minmax(250px, 500px) 1fr;
+    gap: 1em;
 }
 
 .title{ 
