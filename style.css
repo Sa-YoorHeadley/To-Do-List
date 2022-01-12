@@ -20,8 +20,8 @@ body{
 
     display: grid;
     grid:
-    "header header header header" auto
-    "...... lists active ......" auto/
+    "header header header header " auto
+    ". lists active ." auto /
     1fr minmax(100px, 300px) minmax(250px, 500px) 1fr;
     gap: 1em;
 }
@@ -41,7 +41,7 @@ body{
 .task-list{
     list-style: circle;
     line-height: 1.5;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     padding-left: 1.1em;
 }
 .list-name{
@@ -61,6 +61,7 @@ body{
     font-size: inherit;
     transition: border-bottom 200ms ease-in;
     order: 2;
+    padding: 0.25em;
 }
 .new:focus{
     border-bottom-width: 3px;
@@ -73,6 +74,12 @@ body{
 }
 .new.list{
     font-size: 1.3rem;
+}
+.active-list{
+    font-weight: 800;
+}
+.new.task{
+    margin-bottom: 0;
 }
 
 form{
@@ -94,9 +101,18 @@ form{
 .btn.create:hover{
     opacity: 0.7;
 }
-.active-list{
-    font-weight: 700;
+.btn.delete{
+    font-weight: 900;
+    letter-spacing: 1px;
+    font-size: 1.1rem;
+    opacity: 0.8;
+    transition: color 150ms;
 }
+
+.btn.delete:hover{
+    color: var(--warning);
+}
+
 .todo-list{
     --spacer: 1.4rem;
 
@@ -104,7 +120,7 @@ form{
     background-color: var(--light);
     color: var(--dark);
  }
- .todo-header{
+.todo-header{
      padding: var(--spacer);
      background-color: #d4d4d4;
      display: flex;
@@ -120,6 +136,10 @@ form{
  }
  .todo-body{
      padding: var(--spacer);
+     position: relative;
+ }
+ .new-task-creator .create{
+     color: var(--primary);
  }
  [type="checkbox"]{
      opacity: 0;
@@ -129,10 +149,11 @@ form{
      display: inline-flex;
      align-items: center;
      position: relative;
-     margin-bottom: 1.25em;
+     cursor: pointer;
  }
- .task{
+.task{
      position: relative;
+     margin-bottom: 1.25em;
  }
  .task::after{
      content: "";
@@ -172,10 +193,24 @@ form{
 .task label::after{
     content: '';
     position: absolute;
-    left: 0;
+    left: 1.5em;
     right: 0;
     height: 3px;
     background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 150ms ease-in-out;
 }
-
- 
+[type="checkbox"]:checked + label::after{
+    transform: scaleX(1);
+    transform-origin: left;
+}
+.delete-tasks{
+    display: flex;
+    justify-content: space-evenly;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -1.5em;
+    color: var(--light);
+}
